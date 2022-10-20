@@ -10,7 +10,7 @@ Yatube - это социальная сеть выраженная в виде A
 
 ```bash
   git clone https://github.com/UchihaIP/api_final_yatube.git 
-  cd kittygram
+  cd api_final_yatube
 ```
 Cоздать и активировать виртуальное окружение:
 ```bash
