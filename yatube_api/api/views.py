@@ -8,6 +8,7 @@ from .serializers import (CommentSerializer,
                           FollowSerializer,
                           GroupSerializer,
                           PostSerializer)
+from .viewsets import CustomViewSet
 from posts.models import Group, Post
 
 User = get_user_model()
@@ -19,10 +20,6 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (OwnerOrReadOnly,)
     pagination_class = LimitOffsetPagination
 
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ('group', 'author')
-    # ordering = ("pub_date",)
-
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
@@ -33,7 +30,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class FollowViewSet(viewsets.ModelViewSet):
+class FollowViewSet(CustomViewSet):
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated, OwnerOrReadOnly)
     filter_backends = (filters.SearchFilter,)

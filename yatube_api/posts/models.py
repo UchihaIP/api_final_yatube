@@ -5,7 +5,6 @@ User = get_user_model()
 
 
 class Group(models.Model):
-    # id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
@@ -66,10 +65,11 @@ class Follow(models.Model):
     )
 
     class Meta:
-        models.UniqueConstraint(
-            fields=('following', 'user'),
-            name='unique_follow',
-        )
+        constraints = [
+            models.UniqueConstraint(
+                fields=['following', 'user'],
+                name='unique_follow', )
+        ]
 
     def __str__(self):
         return f'{self.user} - подписчик {self.following}'
