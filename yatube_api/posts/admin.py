@@ -8,45 +8,45 @@ from .models import (Comment,
 
 class PostAdmin(admin.ModelAdmin):
     list_display = (
-        'pk',
-        'text',
-        'pub_date',
-        'author',
-        'group',
+        "pk",
+        "text",
+        "pub_date",
+        "author",
+        "group",
     )
-    list_editable = ('group',)
-    search_fields = ('text', 'group',)
-    list_filter = ('pub_date',)
-    empty_value_display = '-empty-'
+    list_editable = ("group",)
+    search_fields = ("text", "group",)
+    list_filter = ("pub_date",)
+    empty_value_display = "-empty-"
 
 
 class GroupAdmin(admin.ModelAdmin):
     list_display = (
-        'pk',
-        'title',
-        'slug',
-        'description',
+        "pk",
+        "title",
+        "slug",
+        "description",
     )
-    search_fields = ('slug',)
+    search_fields = ("slug",)
 
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = (
-        'post',
-        'author',
-        'text',
-        'created',
+        "post",
+        "author",
+        "text",
+        "created",
     )
-    search_fields = ('author',)
+    search_fields = ("author",)
 
 
 class FollowAdmin(admin.ModelAdmin):
     list_display = (
-        'user',
-        'following',
+        "user",
+        "following",
     )
-    search_fields = ('user', 'following',)
-    list_filter = ('user', 'following',)
+    search_fields = ("user", "following",)
+    list_filter = ("user", "following",)
 
 
 admin.site.register(Post, PostAdmin)

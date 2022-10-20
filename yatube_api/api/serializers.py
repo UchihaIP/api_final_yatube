@@ -8,30 +8,30 @@ User = get_user_model()
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = SlugRelatedField(slug_field='username', read_only=True)
+    author = SlugRelatedField(slug_field="username", read_only=True)
 
     class Meta:
-        fields = ('id', 'author', 'text', 'pub_date', 'group', 'image')
+        fields = ("id", "author", "text", "pub_date", "group", "image")
         model = Post
 
 
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
-        read_only=True, slug_field='username'
+        read_only=True, slug_field="username"
     )
     post = serializers.SlugRelatedField(
         read_only=True, slug_field="id"
     )
 
     class Meta:
-        fields = ('id', 'author', 'post', 'text', 'created')
+        fields = ("id", "author", "post", "text", "created")
         model = Comment
-        read_only_fields = ('id', 'author', 'post', 'created')
+        read_only_fields = ("id", "author", "post", "created")
 
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'title', 'slug', 'description')
+        fields = ("id", "title", "slug", "description")
         model = Group
 
 
@@ -39,22 +39,22 @@ class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
         default=serializers.CurrentUserDefault(),
         read_only=True,
-        slug_field='username',
+        slug_field="username",
 
     )
     following = serializers.SlugRelatedField(
         queryset=User.objects.all(),
-        slug_field='username',
+        slug_field="username",
     )
 
     class Meta:
-        fields = ('following', 'user')
+        fields = ("following", "user")
         model = Follow
         validators = (
             serializers.UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
-                fields=('user', 'following'),
-                message=('Вы уже подписаны на автора...')
+                fields=("user", "following"),
+                message="Вы уже подписаны на автора..."
             ),
         )
 
