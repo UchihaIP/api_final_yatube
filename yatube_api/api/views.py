@@ -8,7 +8,7 @@ from .serializers import (CommentSerializer,
                           FollowSerializer,
                           GroupSerializer,
                           PostSerializer)
-from .viewsets import CustomViewSet
+from .viewsets import CreateRetrieveListViewSet
 from posts.models import Group, Post
 
 User = get_user_model()
@@ -30,7 +30,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class FollowViewSet(CustomViewSet):
+class FollowViewSet(CreateRetrieveListViewSet):
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated, OwnerOrReadOnly)
     filter_backends = (filters.SearchFilter,)
